@@ -52,9 +52,9 @@ class Server:
         start_index, end_index = index_range(page, page_size)
         dataset = self.dataset()
         dataset_len = len(dataset)
-        if start_index > dataset_len or end_index > dataset_len:
+        if start_index >= dataset_len or end_index >= dataset_len:
             return []
-        return self.__dataset[start_index:end_index]
+        return dataset[start_index:end_index]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
         """Returns the data and pagination parameters
@@ -73,15 +73,17 @@ class Server:
         """
         data_metadata: dict = {
             'page_size': 0,
-            'page': page,
+            'page': 1,
             'data': [],
             'next_page': None,
-            'prev_page': page - 1,
+            'prev_page': None,
             'total_pages': 0
         }
         data = self.get_page(page=page, page_size=page_size)
         dataset = self.dataset()
         total_pages = math.ceil(len(dataset) / page_size)
+        data_metadata['page'] = page
+        data_metadata['prev_page'] = page - 1
         data_metadata['total_pages'] = total_pages
         if len(data) > 0:
             data_metadata['data'] = data
