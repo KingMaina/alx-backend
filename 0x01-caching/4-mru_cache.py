@@ -1,9 +1,9 @@
 #!/usr/bin/env python3#!/usr/bin/env python3
 
-"""LRU Least Recently Used Cache class
+"""MRU Most Recently Used Cache class
 
     Adds and retrieves data from the cache using
-    the Least Recently Used (LRU) algorithm
+    the Most Recently Used (MRU) algorithm
 """
 from datetime import datetime
 from typing import Union
@@ -11,9 +11,9 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 
 class MRUCache(BaseCaching):
-    """A cache system using LRU
+    """A cache system using MRU
 
-        Manages the cache limit using the LRU algorithm
+        Manages the cache limit using the MRU algorithm
 
         Attributes
         ----------
