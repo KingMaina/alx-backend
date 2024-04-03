@@ -6,6 +6,7 @@
     the Least Recently Used (LRU) algorithm
 """
 from datetime import datetime
+from typing import Dict
 
 BaseCaching = __import__('base_caching').BaseCaching
 
@@ -18,7 +19,7 @@ class LRUCache(BaseCaching):
         Attributes
         ----------
     """
-    __lru_counter: dict[str, datetime]
+    __lru_counter: Dict[str, datetime]
     __key_to_remove: str
 
     def __init__(self):
