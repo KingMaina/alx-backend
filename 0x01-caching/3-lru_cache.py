@@ -6,7 +6,6 @@
     the Least Recently Used (LRU) algorithm
 """
 from datetime import datetime
-from typing import Union
 
 BaseCaching = __import__('base_caching').BaseCaching
 
@@ -20,12 +19,11 @@ class LRUCache(BaseCaching):
         ----------
     """
     __lru_counter: dict[str, datetime]
-    __key_to_remove: Union[str, None]
+    __key_to_remove: str
 
     def __init__(self):
         """Initializes the cache instance"""
         super().__init__()
-        self.__key_to_remove = None
         self.__lru_counter = {}
 
     def put(self, key: str, item):
@@ -58,7 +56,6 @@ class LRUCache(BaseCaching):
                 data.pop(self.__key_to_remove)
                 self.__lru_counter.pop(self.__key_to_remove)
                 print("DISCARD: {}".format(self.__key_to_remove))
-                self.__key_to_remove = None
         self.__lru_counter[key] = datetime.now()
         data.update({key: item})
         self.cache_data = data
