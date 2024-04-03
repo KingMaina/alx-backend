@@ -6,7 +6,7 @@
     the Most Recently Used (MRU) algorithm
 """
 from datetime import datetime
-from typing import Union
+from typing import Union, Dict
 
 BaseCaching = __import__('base_caching').BaseCaching
 
@@ -19,7 +19,7 @@ class MRUCache(BaseCaching):
         Attributes
         ----------
     """
-    __lru_tracker: dict[str, datetime]
+    __lru_tracker: Dict[str, datetime]
     __key_to_remove: Union[str, None]
 
     def __init__(self):
