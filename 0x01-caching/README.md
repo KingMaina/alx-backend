@@ -37,3 +37,7 @@ LRU is an acronym for `Least Recently Used`. It is used to manage data storage i
 MRU is an acronym for `Most Recently Used`. It is used to manage data storage in such a way that the most recently used item is the first item to be removed. This is analogous to a cache - the most recently used item is the first item to be removed. The idea behind MRU is that if an item has been used recently, it is likely to be used again in the near future. This is demonstrated in the [4-mru_cache.py](4-mru_cache.py) file.
 
 ## LFU (Least Frequently Used)
+
+LFU is an acronym for `Least Frequently Used`. It is used to manage data storage in such a way that the least frequently used item is the first item to be removed. 
+* This is analogous to a cache - the least frequently used item is the first item to be removed. The idea behind LFU is that if an item has not been used frequently, it is unlikely to be used again in the near future.
+* In this cache system, the least frequently used item is the first item to be removed when the cache is full. If there is a tie (i.e., two or more items have been used the same number of times), the least recently used item is removed.This is demonstrated in the [100-lfu_cache.py](100-lfu_cache.py) file.
