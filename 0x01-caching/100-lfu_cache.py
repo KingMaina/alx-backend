@@ -61,7 +61,6 @@ class LFUCache(BaseCaching):
                         dups.append(value[0])
                 # If duplicates exist, use LRU as a tiebreaker
                 if (len(dups) > 0):
-                    print(len(dups))
                     time_now = datetime.now()
                     deltas = {key: time_now - value[1] for key,
                               value in self.__lru_counter.items()
