@@ -18,6 +18,11 @@ class LRUCache(BaseCaching):
 
         Attributes
         ----------
+        __lru_counter: Dict[str, List]
+            Dictionary that tracks how the recently used resource
+            and the time it was added/modified
+        __key_to_remove: str
+            Key that maps to the data in the cache to remove
     """
     __lru_counter: Dict[str, datetime]
     __key_to_remove: str

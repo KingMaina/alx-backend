@@ -18,6 +18,11 @@ class MRUCache(BaseCaching):
 
         Attributes
         ----------
+        __mfu_counter: Dict[str, List]
+            Dictionary that tracks the most frequently accessed resource
+            and the time it was added/modified
+        __key_to_remove: str
+            Key that maps to the data in the cache
     """
     __mru_tracker: Dict[str, datetime]
     __key_to_remove: Union[str, None]
