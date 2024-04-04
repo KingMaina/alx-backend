@@ -19,14 +19,14 @@ class MRUCache(BaseCaching):
         Attributes
         ----------
     """
-    __lru_tracker: Dict[str, datetime]
+    __mru_tracker: Dict[str, datetime]
     __key_to_remove: Union[str, None]
 
     def __init__(self):
         """Initializes the cache instance"""
         super().__init__()
         self.__key_to_remove = None
-        self.__lru_tracker = {}
+        self.__mru_tracker = {}
 
     def put(self, key: str, item):
         """Adds data in the cache using a key
@@ -52,19 +52,19 @@ class MRUCache(BaseCaching):
 
                 # Calculate time since data was last added/modified
                 deltas = {key: time_now - value for key,
-                          value in self.__lru_tracker.items()}
+                          value in self.__mru_tracker.items()}
 
                 # Sort the time deltas in descending order and
                 # select the data with the smallest delta to be removed
-                self.__key_to_remove = sorted(
-                    deltas.items(), key=lambda item: item[1])[0][0]
+                self.__key_to_remove = sorted(deltas.items(),
+                                              key=lambda item: item[1])[0][0]
 
                 # Remove the most recently used data
                 data.pop(self.__key_to_remove)
-                self.__lru_tracker.pop(self.__key_to_remove)
+                self.__mru_tracker.pop(self.__key_to_remove)
                 print("DISCARD: {}".format(self.__key_to_remove))
                 self.__key_to_remove = None  # Reset key to be removed
-        self.__lru_tracker[key] = datetime.now()
+        self.__mru_tracker[key] = datetime.now()
         data.update({key: item})
         self.cache_data = data
 
@@ -80,5 +80,5 @@ class MRUCache(BaseCaching):
             return None
         data = self.cache_data.get(key, None)
         if data is not None:
-            self.__lru_tracker[key] = datetime.now()
+            self.__mru_tracker[key] = datetime.now()
         return data
