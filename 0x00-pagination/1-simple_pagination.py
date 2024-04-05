@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
-""""""
+"""Simple pagination
+
+    Server that gets the data indexes for the given
+    pagination parameters
+"""
 import csv
-import math
 from typing import List
 
 index_range = __import__('0-simple_helper_function').index_range
@@ -14,6 +17,7 @@ class Server:
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
+        """Instantiate a server instance"""
         self.__dataset = None
 
     def dataset(self) -> List[List]:

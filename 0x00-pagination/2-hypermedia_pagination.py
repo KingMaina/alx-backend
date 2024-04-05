@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 
-""""""
+"""Simple pagination
+
+    Server that gets the data indexes for the given
+    pagination parameters
+"""
 import csv
 import math
 from typing import List
@@ -14,6 +18,7 @@ class Server:
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
+        """Instantiate a server instance"""
         self.__dataset = None
 
     def dataset(self) -> List[List]:
@@ -83,7 +88,10 @@ class Server:
         dataset = self.dataset()
         total_pages = math.ceil(len(dataset) / page_size)
         data_metadata['page'] = page
-        data_metadata['prev_page'] = page - 1
+        if page == 1:
+            data_metadata['prev_page'] = None
+        else:
+            data_metadata['prev_page'] = page - 1
         data_metadata['total_pages'] = total_pages
         if len(data) > 0:
             data_metadata['data'] = data

@@ -14,6 +14,7 @@ class Server:
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
+        """Instantiate a server instance"""
         self.__dataset = None
         self.__indexed_dataset = None
 
@@ -40,6 +41,7 @@ class Server:
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
+        """Returns data and pagination parameters"""
         result: Dict = {
             'index': None,
             'data': [],
@@ -52,21 +54,15 @@ class Server:
         assert index <= dataset_len and index >= 0
         result['index'] = index
         result['page_size'] = page_size
-        indexed_data: int = page_size
+        num_indexed_data: int = page_size
         result['next_index'] = index + page_size
         for i in range(index, dataset_len):
             data = dataset.get(i, None)
-            if data is not None and indexed_data > 0:
+            if data is not None and num_indexed_data > 0:
                 result['data'].append(dataset[i])
-                indexed_data -= 1
-            elif data is not None and indexed_data == 0:
-                if dataset.get(i , None) is not None:
+                num_indexed_data -= 1
+            elif data is not None and num_indexed_data == 0:
+                if dataset.get(i, None) is not None:
                     result['next_index'] = i
                 break
-        #     else:
-        #         missing += 1
-        # if missing > 0:
-        #     for i in range(index + page_size)
-        #     result['data'].append()
         return result
-        

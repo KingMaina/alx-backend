@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 """Helper function that returns pagination parameters"""
 from typing import Tuple
 
